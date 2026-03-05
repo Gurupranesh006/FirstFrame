@@ -1,8 +1,8 @@
 # FirstFrame
 
-`FirstFrame` is a lightweight Windows automation project that captures one webcam photo each time you sign in.
+`FirstFrame` is a lightweight Windows automation project that captures one webcam photo each time you sign in and each time you unlock your session.
 
-It uses Task Scheduler to run `startup_capture.py` at logon, then:
+It uses Task Scheduler to run `startup_capture.py` at logon and on session unlock, then:
 - Logs startup timestamp in `startup_log.txt`
 - Captures one webcam frame
 - Saves the photo to `startup_photos/` as `YYYY-MM-DD_HH-MM-SS.jpg`
@@ -11,7 +11,7 @@ It uses Task Scheduler to run `startup_capture.py` at logon, then:
 
 ## Project Structure
 
-![Project Structure](docs/images/project-structure-v2.svg)
+![Project Structure](docs/images/project-structure.svg)
 
 ## Requirements
 
@@ -35,7 +35,9 @@ Set-ExecutionPolicy -Scope Process Bypass
 .\setup_startup.ps1
 ```
 
-This creates or updates a scheduled task named `StartupPhotoCaptureTask` for the current user.
+This creates or updates two scheduled tasks for the current user:
+- `StartupPhotoCaptureTask` (runs at sign-in)
+- `StartupPhotoCaptureTask_OnUnlock` (runs whenever the session is unlocked)
 
 ## Run Manually (Quick Test)
 
@@ -51,16 +53,16 @@ Expected outputs:
 
 ## Verify Startup Automation
 
-1. Sign out and sign back in.
-2. Confirm `startup_log.txt` contains a fresh `STARTED:` entry.
-3. Confirm `startup_photos/` includes a new image with current timestamp.
+1. Sign out and sign back in, then check for a new log/photo entry.
+2. Lock your session (`Win + L`), unlock it, then check for another new log/photo entry.
 
 ## Uninstall / Disable
 
-Remove the scheduled task:
+Remove the scheduled tasks:
 
 ```powershell
 Unregister-ScheduledTask -TaskName "StartupPhotoCaptureTask" -Confirm:$false
+Unregister-ScheduledTask -TaskName "StartupPhotoCaptureTask_OnUnlock" -Confirm:$false
 ```
 
 ## Troubleshooting
@@ -75,7 +77,7 @@ Unregister-ScheduledTask -TaskName "StartupPhotoCaptureTask" -Confirm:$false
 
 ## Security and Privacy
 
-- This project captures images from your local webcam at user sign-in.
+- This project captures images from your local webcam at user sign-in and session unlock.
 - Use it only on systems where all users are informed and where this behavior complies with policy/law.
 
 ## License

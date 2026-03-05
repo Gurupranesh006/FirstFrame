@@ -1,5 +1,6 @@
 param(
-    [string]$TaskName = "StartupPhotoCaptureTask"
+    [string]$TaskName = "StartupPhotoCaptureTask",
+    [string]$UnlockTaskName = "StartupPhotoCaptureTask_OnUnlock"
 )
 
 $scriptPath = Join-Path $PSScriptRoot "startup_capture.py"
@@ -16,12 +17,26 @@ if (-not $pythonCmd) {
 
 $pythonPath = $pythonCmd.Source
 
-$action = New-ScheduledTaskAction -Execute $pythonPath -Argument "`"$scriptPath`""
-$trigger = New-ScheduledTaskTrigger -AtLogOn -User $env:USERNAME
-$principal = New-ScheduledTaskPrincipal -UserId "$env:USERDOMAIN\$env:USERNAME" -LogonType Interactive -RunLevel Limited
-$settings = New-ScheduledTaskSettingsSet -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries
+$principalUser = "$env:USERDOMAIN\$env:USERNAME"
+$taskCommand = "`"$pythonPath`" `"$scriptPath`""
 
-Register-ScheduledTask -TaskName $TaskName -Action $action -Trigger $trigger -Principal $principal -Settings $settings -Force | Out-Null
+function Register-Task {
+    param(
+        [string]$Name,
+        [string]$Schedule
+    )
 
-Write-Host "Scheduled task '$TaskName' created/updated successfully."
-Write-Host "It will run at each sign-in for user $env:USERNAME."
+    $output = schtasks /Create /TN $Name /TR $taskCommand /SC $Schedule /RL LIMITED /F /RU $principalUser 2>&1
+    if ($LASTEXITCODE -ne 0) {
+        Write-Error "Failed to register task '$Name' with schedule '$Schedule'."
+        $output | ForEach-Object { Write-Error $_ }
+        exit 1
+    }
+}
+
+Register-Task -Name $TaskName -Schedule ONLOGON
+Register-Task -Name $UnlockTaskName -Schedule ONUNLOCK
+
+Write-Host "Scheduled task '$TaskName' created/updated successfully (runs at sign-in)."
+Write-Host "Scheduled task '$UnlockTaskName' created/updated successfully (runs when session is unlocked)."
+Write-Host "Both tasks run for user $env:USERNAME."
