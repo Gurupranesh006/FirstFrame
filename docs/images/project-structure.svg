@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="980" height="560" viewBox="0 0 980 560" role="img" aria-labelledby="title desc">
+  <title id="title">Project Structure</title>
+  <desc id="desc">Visual layout of project files.</desc>
+  <defs>
+    <style>
+      .bg { fill: #f7f7f2; }
+      .panel { fill: #ffffff; stroke: #1f2937; stroke-width: 2; rx: 12; }
+      .h { font: 700 28px 'Segoe UI', Tahoma, sans-serif; fill: #111827; }
+      .f { font: 600 20px 'Consolas', 'Courier New', monospace; fill: #111827; }
+      .d { font: 500 16px 'Segoe UI', Tahoma, sans-serif; fill: #374151; }
+    </style>
+  </defs>
+
+  <rect class="bg" x="0" y="0" width="980" height="560"/>
+  <text x="40" y="58" class="h">FirstFrame Project Layout</text>
+
+  <rect class="panel" x="40" y="90" width="900" height="430"/>
+
+  <text x="70" y="140" class="f">mini-projects/</text>
+  <text x="120" y="185" class="f">README.md</text>
+  <text x="120" y="220" class="f">LICENSE</text>
+  <text x="120" y="255" class="f">requirements.txt</text>
+  <text x="120" y="290" class="f">setup_startup.ps1</text>
+  <text x="120" y="325" class="f">startup_capture.py</text>
+  <text x="120" y="360" class="f">startup_log.txt</text>
+  <text x="120" y="395" class="f">startup_photos/</text>
+  <text x="120" y="430" class="f">docs/images/</text>
+
+  <text x="420" y="188" class="d">Project documentation and setup guide</text>
+  <text x="420" y="223" class="d">MIT open-source license</text>
+  <text x="420" y="258" class="d">Python dependency list</text>
+  <text x="420" y="293" class="d">Registers Windows startup task</text>
+  <text x="420" y="328" class="d">Main startup logging and photo script</text>
+  <text x="420" y="363" class="d">Runtime event log output</text>
+  <text x="420" y="398" class="d">Captured JPEG files</text>
+  <text x="420" y="433" class="d">Workflow and architecture diagrams</text>
+</svg>

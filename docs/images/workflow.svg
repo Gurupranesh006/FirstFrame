@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="460" viewBox="0 0 1200 460" role="img" aria-labelledby="title desc">
+  <title id="title">FirstFrame Startup Workflow</title>
+  <desc id="desc">Diagram showing setup and runtime flow for startup photo capture.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#f8fafc"/>
+      <stop offset="100%" stop-color="#e2e8f0"/>
+    </linearGradient>
+    <style>
+      .title { font: 700 34px 'Segoe UI', Tahoma, sans-serif; fill: #0f172a; }
+      .sub { font: 500 16px 'Segoe UI', Tahoma, sans-serif; fill: #334155; }
+      .box { fill: #ffffff; stroke: #0f172a; stroke-width: 2; rx: 12; }
+      .txt { font: 600 17px 'Segoe UI', Tahoma, sans-serif; fill: #0f172a; }
+      .small { font: 500 14px 'Segoe UI', Tahoma, sans-serif; fill: #334155; }
+      .arrow { stroke: #0f172a; stroke-width: 3; fill: none; marker-end: url(#m); }
+    </style>
+    <marker id="m" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#0f172a"/>
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="1200" height="460" fill="url(#bg)"/>
+  <text x="40" y="60" class="title">FirstFrame Workflow</text>
+  <text x="40" y="88" class="sub">From one-time setup to photo capture at every Windows sign-in</text>
+
+  <rect class="box" x="40" y="140" width="240" height="170"/>
+  <text x="60" y="180" class="txt">1. Install deps</text>
+  <text x="60" y="210" class="small">pip install -r</text>
+  <text x="60" y="232" class="small">requirements.txt</text>
+
+  <rect class="box" x="330" y="140" width="260" height="170"/>
+  <text x="350" y="180" class="txt">2. Register task</text>
+  <text x="350" y="210" class="small">run setup_startup.ps1</text>
+  <text x="350" y="232" class="small">creates StartupPhotoCaptureTask</text>
+
+  <rect class="box" x="640" y="140" width="240" height="170"/>
+  <text x="660" y="180" class="txt">3. User logs in</text>
+  <text x="660" y="210" class="small">Task Scheduler trigger</text>
+  <text x="660" y="232" class="small">runs startup_capture.py</text>
+
+  <rect class="box" x="930" y="140" width="230" height="170"/>
+  <text x="950" y="180" class="txt">4. Capture + log</text>
+  <text x="950" y="210" class="small">save photo to startup_photos/</text>
+  <text x="950" y="232" class="small">append status to startup_log.txt</text>
+
+  <path class="arrow" d="M280 225 L320 225"/>
+  <path class="arrow" d="M590 225 L630 225"/>
+  <path class="arrow" d="M880 225 L920 225"/>
+</svg>

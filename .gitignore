@@ -1,0 +1,12 @@
+# Python cache
+__pycache__/
+*.pyc
+
+# Runtime outputs
+startup_log.txt
+startup_photos/*.jpg
+startup_photos/*.jpeg
+startup_photos/*.png
+
+# VS Code
+.vscode/
