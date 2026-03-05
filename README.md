@@ -37,7 +37,7 @@ Set-ExecutionPolicy -Scope Process Bypass
 
 This creates or updates two scheduled tasks for the current user:
 - `StartupPhotoCaptureTask` (runs at sign-in)
-- `StartupPhotoCaptureTask_OnUnlock` (runs whenever the session is unlocked)
+- `StartupPhotoCaptureTask_OnUnlock` (runs on local session unlock/reconnect event)
 
 ## Run Manually (Quick Test)
 
@@ -55,6 +55,8 @@ Expected outputs:
 
 1. Sign out and sign back in, then check for a new log/photo entry.
 2. Lock your session (`Win + L`), unlock it, then check for another new log/photo entry.
+
+Note: The unlock task listens to `Microsoft-Windows-TerminalServices-LocalSessionManager/Operational` event `25`.
 
 ## Uninstall / Disable
 
