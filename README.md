@@ -11,7 +11,7 @@ It uses Task Scheduler to run `startup_capture.py` at logon, then:
 
 ## Project Structure
 
-![Project Structure](docs/images/project-structure.svg)
+![Project Structure](docs/images/project-structure-v2.svg)
 
 ## Requirements
 
