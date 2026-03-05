@@ -16,7 +16,7 @@
 
   <rect class="panel" x="40" y="90" width="900" height="430"/>
 
-  <text x="70" y="140" class="f">mini-projects/</text>
+  <text x="70" y="140" class="f">FirstFrame/</text>
   <text x="120" y="185" class="f">README.md</text>
   <text x="120" y="220" class="f">LICENSE</text>
   <text x="120" y="255" class="f">requirements.txt</text>
